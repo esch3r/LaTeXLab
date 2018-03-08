@@ -1,0 +1,150 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{array}
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\center % Center everything on the page
+\textsc{\LARGE University of Minnesota-Duluth}\\[1.5cm] % Name of your university/college
+\textsc{\Large EE 2212}\\[0.5cm] % Major heading such as course name
+\textsc{\large Electronics I}\\[0.5cm] % Minor heading such as course title
+\HRule \\[0.4cm]
+{ \huge \bfseries \emph{{\color{black}Lab 1: RC Transient response }}}\\[0.4cm] % Title of your document
+{\color{black}{\large \today}}\\
+\HRule \\[1cm]
+
+
+% Title section
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Johnathan \textsc{Machler}\\
+Brice  \textsc{Johnson }
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dawson \textsc{Rosell} % Lab Supervisor's Name
+\end{flushright}
+
+
+\end{minipage}\\[1cm] % parameter alters space between this part and the abstract
+
+\begin{abstract}
+[200-300 words]
+This lab will cover the fundamentals of RC circuits with one of two complimenting techniques. The purpose is to show the relationship between the behavior an RC circuit with impulse excitation. Various circuit concepts will be reexamined such as the transfer function.Both circuit in lab are duals of each other meaning that if put together port to port they would functionally cancel each other out. This goes along with the concepts learned in fundamental calculus like that the integral is an operation opposite to differentiation. These functional building blocks are critical analogues circuits that are much more complex in scale. And are vital to understanding many concepts within signal processing. To verify the results a three pronged approach will be implemented to show all forms of analysis converge on the same behavior. 
+\end{abstract}
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+
+
+
+
+\section*{Introduction:}
+This lab will be a broad overview of many of the concepts from EE 2006. It will be a review of how to use a lot of the lab equipment in the context of circuits which vary with respect to frequency and time. Concept of impedance and transfer functions will be explored through constructing a circuit dual of a bandpass filter. This lab will focus first on the transient analysis first. The second component of this lab that covers things in the frequency domain will happen in lab 2. 
+\section*{Background:}
+
+The concept of this experiment to stimulate an RC circuit with a unit impulse. And look at the resulting natural response with respect to time. The theory is that the time that it takes for the capacitor to discharge is dependent upon Kirchhoff current laws.  And forms a first order linear differential equation 
+\begin{align}
+C \dfrac{dV}{dt}+\dfrac{V}{R}&=0 & E.g. \enspace  & 10nF \dfrac{dV}{dt}+ \dfrac{V}{\SI{10}{\kohm}}=0\\
+\tau&=RC  &  E.g. \enspace  & 10K*10n = 1\mu S
+\end{align}
+
+The time taken for the voltage to fall  is given by the RC time constant. In lab we verified this constant through finding the amount of time taken to reach $1\tau$ with the cursor  (given the constraints of the circuit both the experimental and theoretical results should match). To verify the settling time $5\tau$ was used as the window used.
+\section*{Procedure:}
+First in Pspice we created a schematic to stimulate the behavior of a passive integrator (see FIG 1).  Drive circuit 1 with a 2 volt peak-to-peak square wave  (the two volt amplitude is not critical-look for minimal noise to set the amplitude) and observed the output. Our $V_{in}$ used the Vpulse component in Pspice.  To create the passive differentiator flip the capacitor $10nF$ with the $\SI{10}{\kohm}$ resistor. Each of the following steps were mirrored on the breadboard with the function generator used at the port of $V_{in}$ and the oscilloscope attached across $V_{out}$ 
+
+\begin{flushleft}
+Materials needed for lab:
+\end{flushleft}
+\begin{itemize}
+\item Breadboard
+\item Function Generator 
+\item Oscilloscope
+\item  $\SI{10}{\kohm}$ Resistor and $10nF$ Capacitor 
+\end{itemize}
+
+
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{l l}
+\includegraphics[scale=.10]{Int.PNG}
+&
+\includegraphics[scale=.09]{dif.PNG}
+\end{tabular}
+\end{center}
+
+
+\caption{ Circuit Duals}
+\label{Fig:Race}
+\end{figure}
+
+
+\subsection{Equations}
+ 
+\begin{align}
+V_{out}(t) &=A(1-e^{-\dfrac{t}{\tau}}) & ``Stablization"  \\
+V_{out}(t) & =A(e^{-\dfrac{t}{\tau}})  & Negative \enspace Decay  \\
+V_{out}(t) & = \alpha \dfrac{d(V_{in}(t))}{dt} & Passive\enspace diffeneriator \\
+V_{out}(t) &= \alpha \int_{a}^{b} V_{in} (t)dt  & Passive\enspace Integrator
+\end{align}
+
+
+\begin{flushright}
+Where $\tau = RC $ is the time constant, A is the amplitude, t is the variable time \
+
+\end{flushright}
+
+
+
+
+\section*{Measurement and Analysis of Results:}
+In addition to verifying the solution to equation 1 for both critical decay and stabilization . We also saw some oddities on the oscilloscope first that it displayed both the signal and a 180 degree mirror image of the signal. My lab partner hypothesized that this may be due to bandwidth that is much shorter than what is required to measure the signal. Once we made a few adjustments on the O-scope the signal had much less noise. Additionally, we observed that that the dual circuits that we used generated both a integral of the square wave and the derivative of the square wave.  This is similar to a previous lab done in 2006 involving an Op amp's slew  rate which generated an equivalent distortion.
+
+\subsection{Tables:}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline 
+\multicolumn{5}{|c|}{\textbf{Time Domain Response} } \\ 
+\hline 
+Parameter & Calculated  & SPICE & Measured  & Comments \\ 
+\hline 
+Fall Time,$t_{f}$ & 0.22 & 0.23 & 0.29 &  Consistent \\ 
+\hline 
+Time Constant,$\tau$ & 0.1 & .0972 & 0.1 & Consistent   \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+
+\subsection{Graphs:}
+Below is a comparison of the plots created by both the O-scope and SPICE. 
+\begin{figure}
+\begin{tabular}{l l}
+
+Passive Integrator & Passive differentiator \\
+\includegraphics[scale=.2]{RCresponse.png} & \includegraphics[scale=.2]{RCresponse2.png}\\ 
+\includegraphics[scale=.80]{tek00001.jpg}& \includegraphics[scale=.75]{TEK00002.jpg} \\
+\end{tabular} 
+\end{figure}
+
+
+
+\section*{Conclusion:}
+The lab went well overall there was a little ambient RF noise that on the signal itself. The results that we attained in lab were intraconsistent with the theory devised in class. One suggestion I would make for this lab would be to demonstrate and model the response of an op amp slew rate with an equivalent RC circuit. 
+
+\end{document}

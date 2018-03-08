@@ -1,0 +1,154 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{array}
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\center % Center everything on the page
+\textsc{\LARGE University of Minnesota-Duluth}\\[1.5cm] % Name of your university/college
+\textsc{\Large EE 2212}\\[0.5cm] % Major heading such as course name
+\textsc{\large Electronics I}\\[0.5cm] % Minor heading such as course title
+\HRule \\[0.4cm]
+{ \huge \bfseries \emph{{\color{black}Lab 4: Diode Parameter Extraction and the Half Wave Rectifier }}}\\[0.4cm] % Title of your document
+{\color{black}{\large \today}}\\
+\HRule \\[1cm]
+
+
+% Title section
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Johnathan \textsc{Machler}\\
+Brice  \textsc{Johnson }
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dawson \textsc{Rosell} % Lab Supervisor's Name
+\end{flushright}
+
+
+\end{minipage}\\[1cm] % parameter alters space between this part and the abstract
+
+\begin{abstract}
+Using concepts from last lab we will implement the concept of gain to design Op-Amps. In implementation the following constructions will be made: two different versions of an inverting Op-amp, a non-inverting operational amplifier, and a cascade of an inverting with a non-inverting amplifier.Each variant will use the $\mu A741$ for the op amp.  Each of these circuit topologies  from the simple to the complex will show that there is a relatively simple way of translating each one in terms of the transfer function of each with response to some time and or frequency varying signal. Similar to the previous labs the $\mu A741$ produces a similar distortion to an RC circuit, which can easily be ascertained from looking at a frequency response plot, sometimes tilted a Bode plot. Using this Bode plot we can extract where gain and attenuate exist at different frequencies. This brief snapshot of the frequency domain using active filtering, as opposed to last lab which used passive filtering, has much more common with what is used in commercial devices like radios. In many cases active filtering can be much more effective at filtering specific noise within a system, especially using the active filtering in cascade. This of course comes with a caveat of other forms of distortion that exist within the amplifier itself.
+\end{abstract}
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+
+
+
+\section*{Introduction:}
+
+\section*{Background:}
+\section*{Procedure:}
+Using SPICE, simulate the circuit  shown in  Figure 1.  Obtain the ID-VD characteristic curve for the 1N4002 in SPICE  over a range at least of 0 to 0.8 volts for VD and  find the diode current value for the  diode when $V_{D} = 0.7V$.  For this, it might be useful to use a DC voltage sweep in conjunction with a VDC source. In addition, you will need to change the x-axis value to be the voltage across the diode under $ Plot_Axis Settings…_Axis$ 
+Examine the model characteristics for the 1N4002 PSPICE, which can be
+found by selecting the device and then $Edit_Model…_Edit$ Instance Model (Text)…  You 	will use 	this 	information for comparing to your measurements.
+ 
+Construct the Figure 1 circuit. Use the multimeter to   measure ID and the multimeter also to measure VD.    Note the ID is  measured by measuring the voltage across the resistor and dividing by R, that is apply Ohm’s Law.    Pay attention to the diode orientation. The banded side is the cathode end.  Change the supply voltage VS to adjust ID to the desired current setting, then measure VD. Take enough readings to accurately define the diode characteristic.   You should measure out to $I_{D}$ values of a $~3mA$.  Record your results in a data table in both your laboratory notebook and in your laboratory report.   I suggest using EXCEL for calculations and graphing.  For example your data columns might look like:
+
+
+\begin{flushleft}
+Materials needed for lab:
+\end{flushleft}
+
+
+\begin{itemize}
+\item Breadboard
+\item Function Generator 
+\item Oscilloscope
+\item  $1N4002$ Diodes 
+\item  $\SI{1}{\kohm},\SI{100}{\kohm}$ Resistors
+\item $\pm$ 12 volt power supply \\
+
+\end{itemize}
+
+
+\subsection{Equations:}
+ 
+\begin{align}
+I_{D} &= I_{S}(e^{\dfrac{qV_{D}}{nKT}}-1) & Ideal \enspace Diode \enspace Equation
+\end{align}
+
+\subsection{Tables:}
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline 
+\multicolumn{4}{|c|}{Diode Parameters} \\ 
+\hline 
+$V_{D}$& $V_{R}$& $\frac{V_{R}}{R}$ & $Log(I_{D})$\\ 
+\hline 
+0 & 0 & 0 & 0\\ 
+\hline 
+0 & 0 & 0 & 0 \\ 
+\hline 
+0 & 0 & 0 & 0\\
+\hline 
+
+\end{tabular} 
+\end{center}
+\subsection{Schematics:}
+
+
+
+Schematics for both the inverting and noninverting Op amp can be found on the EE 2212 course page. The respective gains of $A_{1}= 4$ for the noninverting and $A_{2}=-5$ for the inverting amplifier were deduced from the prelab. The combination of these two Op-amps in cascade for a transfer function can be taken as the product of their gains $A_{1}*A_{2}= -20$
+\begin{figure} [!ht]% ht Placement parameter 
+\begin{tabular}{l}
+ \includegraphics[scale=.15]{uA741.png}\\ 
+{\includegraphics[scale=.25]{cascade.png}} \\ 
+\end{tabular} 
+\end{figure}
+
+
+\pagebreak
+\section*{Measurement and Analysis of Results:}
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Frequency response of both Active filters]{{\includegraphics[scale=.20]{cascadef.png} }}%
+    \qquad
+    \subfloat[Transient Response of the Wein Oscillator ]{{\includegraphics[scale=.20]{German.png} }}%
+    \caption{Pspice plots for .Tran response of Wein Oscillator $\&$ active filter freq response.}%
+    \label{fig:example}%
+    
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Low Pass Filter- Oscope output]{{\includegraphics[scale=.75]{LPF.jpg} }}%
+    \qquad
+    \subfloat[High Pass Filter- Oscope Output]{{\includegraphics[scale=.75]{HPF.jpg} }}%
+    \caption{Transient Response comparison for both Active Filters}%
+    \label{fig:example}%
+\end{figure}
+\vspace{5mm}
+\begin{figure}[h!]
+\begin{center}
+  \includegraphics[scale=.75]{Wieno.jpg}
+  \caption{Wein Oscillator Transient response}
+\end{center}
+\end{figure}
+
+
+\section*{Conclusion:}
+
+ 
+
+\end{document}

@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{subfig}
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\center % Center everything on the page
+\textsc{\LARGE University of Minnesota-Duluth}\\[1.5cm] % Name of your university/college
+\textsc{\Large EE 2212}\\[0.5cm] % Major heading such as course name
+\textsc{\large Electronics I}\\[0.5cm] % Minor heading such as course title
+\HRule \\[0.4cm]
+{ \huge \bfseries \emph{{\color{black}Lab 3: Additional Op-Amp Circuits  }}}\\[0.4cm] % Title of your document
+{\color{black}{\large \today}}\\
+\HRule \\[1cm]
+
+
+% Title section
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Johnathan \textsc{Machler}\\
+Brice  \textsc{Johnson }
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dawson \textsc{Rosell} % Lab Supervisor's Name
+\end{flushright}
+
+
+\end{minipage}\\[1cm] % parameter alters space between this part and the abstract
+
+\begin{abstract}
+The purpose of this lab was to show the how operational amplifiers can be used as oscillators and active high and low pass filters. In demonstrating this in the lab, we will confirm the transfer function in its use on op-amps.  Often this transfer function is that it can be used to compute the gain for any given frequency. As with the previous lab, corner frequency will be found by hand and verified with Pspice. With the construction of the Wein Bridge oscillator, we will show one use of Operational amplifiers for negative and positive feedback. In the lab, positive feedback of the Wein Oscillator will form resonance. Another common by-product in the lab is clipping which can be modeled with diodes. Which it should be noted most of the time resonance an unwanted affect. These concepts are critical in the study of control theory. In RF these active filters are used so often, they are basically the vocabulary of analog circuits.
+\end{abstract}
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+
+
+
+
+\section*{Introduction:}
+This lab is a continuation of the previous lab. In the last lab, we covered many different concepts of ways of filtering an input. This lab is a similar focus with an emphasis on filtering that uses active components such as op-amps. One byproduct of poorly designed filters is resonance. So, in this lab, we will explore this phenomenon by constructing a wein oscillator to intentionally model this. Another interesting thing to consider is that the $\mu A741$ chip itself acts like and RC circuit which can be problematic in some circumstances or applications. With a knowledge of active filtering, we can not only model this but potentially cancel out the effects.
+\section*{Background:}
+Any details left out of this paper can be found on the EE 2122 course page.
+\section*{Procedure:}
+Before entering the lab, run some calculations for a gain of 14db on the op-amps featured on the EE 2122 course page. Using the $\mu A741$ data sheet figure out the impedance of the $Z_{F}$ and $R$ appropriate for the chip. All resistors in the circuit must be greater than 2kohm. Using the 12 Volt power supply attach the leads to the PINs assigned to the data sheet. Attach leads coming from the function generator to $V_{in}$. Following the schematics are given, first wire up the High Pass and Low Pass filters separately. Using PSpice verify your results of the construction. Then, attached $V_{out}$ of the HPF to $V_{in}$ of the LPF, attaching the two op amps in cascade with each other (creating the bandpass filter).  Next, create the wein bridge oscillator on Pspice. Then carefully construct the same circuit on the breadboard. The circuit starts from random noise, which provides the phase shift nudging it into positive feedback.
+
+
+\begin{flushleft}
+Materials needed for lab:
+\end{flushleft}
+\begin{itemize}
+\item Breadboard
+\item Function Generator 
+\item Oscilloscope
+\item $\mu A741$ Op Amp Chip 
+\item $12\pm$ Volt Power Supply 
+\item  $\SI{10}{\kohm}$ Resistor and $10nF$ Capacitor 
+\end{itemize}
+
+
+
+
+\subsection{Equations}
+ 
+\begin{align}
+A_{V}(f \longmapsto low) &= \dfrac{-R_{2}}{R_{1}}  & Low \enspace Pass  \enspace Filter \\
+A_{V}(f \longmapsto low) &= \dfrac{-R_{2}}{R_{1}}  & High \enspace Pass  \enspace Filter \\
+f_{c} &=\dfrac{1}{2\pi RC} & Corner \enspace Frequency 
+\end{align}
+
+
+\begin{flushright}
+Where $\tau = RC $ is the time constant, A is the amplitude, t is the variable time \
+
+\end{flushright}
+
+\pagebreak
+\subsection{Schematics:}
+Using ports in Pspice we were quickly able to plot the frequency to gain response of both circuits in conjunction with each other. The bottom schematic is of the Wein Oscillator.\\
+\begin{tabular}{l l}
+
+\includegraphics[scale=.25]{sschem.png} & \includegraphics[scale=.25]{cschem.png} \\ 
+\multicolumn{2}{l}{\includegraphics[scale=.25]{gschem.png}} \\ 
+\end{tabular} 
+
+
+
+\section*{Measurement and Analysis of Results:}
+Using PSpice parametric modeling, we were able to plot a family of curves that satisfied the initial any set of initial conditions posed. The tipping point for values of resistance and capacitance on the op amps that could cause the wein bridge to go into resonance is [add more]. In the lab, we encountered a lot of clipping.It is interesting to note that the clipping we encountered mimicked the behavior of a double zener diode clipper. The graph on the left is the response of both the high and low pass filters from the intersection between the two we can easily deduce the corner frequency, which can be seen on the cursor trace.
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Frequency response of both Active filters]{{\includegraphics[scale=.20]{cascadef.png} }}%
+    \qquad
+    \subfloat[Transient Response of the Wein Oscillator ]{{\includegraphics[scale=.20]{German.png} }}%
+    \caption{Pspice plots for .Tran response of Wein Oscillator $\&$ active filter freq response.}%
+    \label{fig:example}%
+    
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Low Pass Filter- Oscope output]{{\includegraphics[scale=.75]{LPF.jpg} }}%
+    \qquad
+    \subfloat[High Pass Filter- Oscope Output]{{\includegraphics[scale=.75]{HPF.jpg} }}%
+    \caption{Transient Response comparison for both Active Filters}%
+    \label{fig:example}%
+\end{figure}
+\vspace{5mm}
+\begin{figure}[h!]
+\begin{center}
+  \includegraphics[scale=.75]{Wieno.jpg}
+  \caption{Wein Oscillator Transient response}
+\end{center}
+\end{figure}
+
+\section*{Conclusion:}
+Overall, the lab went relatively smoothly we hit a wall analyzing the op-amp $\mu A741$ for some of the transient curves. We did successfully demonstrate active filtering for all three circuit combinations (with a WYSIWYG methodology). With considerable effort, we also generated a plot of the Wein Oscillator but only after probing a capacitor in the circuit for a bit to trigger/give it an initial condition. Using the PSpice to model the same circuit for different trajectories of resonance we considered doing a backward trace to find the initial condition for on particular Oscope plot. Somewhat contrary to "The Brownian or thermal noise should set off the resonance" which was mentioned earlier in the lab. Additionally, we discovered that some of the op-amp chips in the lab we were using were faulty through a process of trial an error. So my lab partner and I resorted to bringing a different but similar Op-amp chip to work as a surrogate (resolving to use the). One development which in this lab would be to analyze what the parameters for R and C lead to resonance, critical, or under dampening. Within the phase space there exist complex eigenvalues which lead to resonance or critical dampening poles etc. So I think computing these from a circuit and then predicting the behavior as topical analysis is much more efficient for learning this.
+
+
+
+\end{document}
