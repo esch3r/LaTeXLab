@@ -1,0 +1,168 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{array}
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\center % Center everything on the page
+\textsc{\LARGE University of Minnesota-Duluth}\\[1.5cm] % Name of your university/college
+\textsc{\Large EE 2212}\\[0.5cm] % Major heading such as course name
+\textsc{\large Electronics I}\\[0.5cm] % Minor heading such as course title
+\HRule \\[0.4cm]
+{ \huge \bfseries \emph{{\color{black}Lab 4: Diode Parameter Extraction and the Half Wave Rectifier }}}\\[0.4cm] % Title of your document
+{\color{black}{\large \today}}\\
+\HRule \\[1cm]
+
+
+% Title section
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Johnathan \textsc{Machler}\\
+Brice  \textsc{Johnson }
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dawson \textsc{Rosell} % Lab Supervisor's Name
+\end{flushright}
+
+
+\end{minipage}\\[1cm] % parameter alters space between this part and the abstract
+
+\begin{abstract}
+The purpose of this lab was to construct an IV curve characteristics for a diode. In lab was done using a DC power supply and DDM to measure the resulting response in the current. To verify these results comparisons using the same model with temperature extremes for the room to bound the result.  Another perspective for observing the properties of the diode with response to a time-varying signal.  In the lab, the full and half-wave rectifier circuits will be imposed between a time-varying signal comparing the output with the input.  As the name implies the negative part of the waveform will be clipped by the rectifier. Another concept introduced in the lab was that of the damping constant tau or decay using lag to flatten them or shape the waveform into a DC steady state. Since the time decay constant isn't infinite, the waveform isn't perfectly flat. 
+\end{abstract}
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+\section*{Introduction:} In this lab we will learn how to model diodes using the IV curve. As well as applications of diodes in their use for rectifying a signal.
+\section*{Background:}
+Use information on the EE 2122 course page for more information. Use the datasheet for the $1N4002$ to see the properties and curves.
+\section*{Procedure:}
+Using SPICE, simulate the circuit  shown in  Figure 1.  Obtain the ID-VD characteristic curve for the 1N4002 in SPICE  over a range at least of 0 to 0.8 volts for VD and  find the diode current value for the  diode when $V_{D} = 0.7V$.  For this, it might be useful to use a DC voltage sweep in conjunction with a VDC source. In addition, you will need to change the x-axis value to be the voltage across the diode under $ Plot_Axis Settings…_Axis$ 
+Examine the model characteristics for the 1N4002 PSPICE, which can be
+found by selecting the device and then $Edit_Model…_Edit$ Instance Model (Text)…  You 	will use 	this 	information for comparing to your measurements.
+ 
+Construct the Figure 1 circuit. Use the multimeter to   measure ID and the multimeter also to measure VD.    Note the ID is  measured by measuring the voltage across the resistor and dividing by R, that is apply Ohm’s Law.    Pay attention to the diode orientation. The banded side is the cathode end.  Change the supply voltage VS to adjust ID to the desired current setting, then measure VD. Take enough readings to accurately define the diode characteristic.   You should measure out to $I_{D}$ values of a $~3mA$.  Record your results in a data table in both your laboratory notebook and in your laboratory report.   I suggest using EXCEL for calculations and graphing.  For example your data columns might look like:
+
+
+\begin{flushleft}
+Materials needed for lab:
+\end{flushleft}
+
+
+\begin{itemize}
+\item Breadboard
+\item Function Generator 
+\item Oscilloscope
+\item  $1N4002$ Diodes 
+\item  $\SI{1}{\kohm},\SI{100}{\kohm}$ Resistors
+\item $\pm$ 12 volt power supply \\
+
+\end{itemize}
+
+
+\subsection{Equations:}
+ 
+\begin{align}
+I_{D} &= I_{S}(e^{\dfrac{qV_{D}}{nKT}}-1) & Ideal \enspace Diode \enspace Equation \\
+log_{10} I_{D} &= log_{10} (I_{S}) + \dfrac{V_{D}}{n26mV} log_{10} e & Linearization \enspace model
+\end{align}
+
+\pagebreak
+\subsection{Schematics:}
+The schematics for both to create the graph for the IV characteristic curve as well as the graph for the Half-wave rectifier. A capacitor was introduced on the left-most circuit to model dampening.
+\begin{figure} [!ht]% ht Placement parameter 
+\begin{tabular}{l l}
+ \includegraphics[scale=.25]{dioder.png}
+{\includegraphics[scale=.25]{dioderc.png}} 
+\end{tabular} 
+\end{figure}
+
+
+\section*{Measurement and Analysis of Results:}
+Our approach was to bound the curve in Pspice for varying temperatures the room could be at to see if our answer was within an acceptable range  (See FIG 1.b). From the graph you can see that the diode within a specific range displayed linear characteristics. The calculated covariance between the $V_{d}$ measured and $V_{D}$ theoretical was $0.023$ and the $StdDev=0.017$. Using some statistical analysis we ran covariance between the two graphs and came up with a significant correlation between the two. Between FIG 2 and FIG 1 you can see we were able to replicate the results from Pspice in lab. 
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Interpolation from measured]{{\includegraphics[scale=.60]{ivcurve.jpg} }}%
+    \qquad
+    \subfloat[IV characteristic modeled in PSpice ]{{\includegraphics[scale=.20]{arange.png} }}%
+    \caption{Comparisosn of Excel interpolation  and PSpice Model}%
+    \label{fig:example}%
+    
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Dampened Half wave rectifier ]{{\includegraphics[scale=.75]{Damped.jpg} }}%
+    \qquad
+    \subfloat[Half wave rectification]{{\includegraphics[scale=.75]{halfw.png} }}%
+    \caption{Oscope Plots for with and without dampening }%
+    \label{fig:example}%
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[Dampened Half wave rectifier ]{{\includegraphics[scale=.25]{Pdiode.png} }}%
+    \qquad
+    \subfloat[Half wave rectification]{{\includegraphics[scale=.25]{Pdiode2.png} }}%
+    \caption{PSpice Plots for with and without dampening }%
+    \label{fig:example}%
+\end{figure}
+\vspace{5mm} 
+
+
+
+\subsection{Tables:}
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|c|}
+\hline 
+\multicolumn{7}{|c|}{IV characteristic curve table} \\ 
+\hline 
+$V_{in}$& $V_{R}$ & $V_{D}$ & $V_{D}$ & $Percent Err.$ & $PctPwr$ & $I_{D}$\\ 
+\hline 
+0.1 & 4.0E-05 & 0.099& 0.0984 & 0.0156 & 0.9840 & 6.36E-08 \\ 
+\hline 
+0.2 & 7.7E-05& 0.199& 0.19790 & 0.0101 & 0.9895 & 1.22E-07 \\ 
+\hline 
+0.3 & 8.45E-04& 0.299 & 0.297 & 0.00453 & 0.9927 & 1.34E-06 \\ 
+\hline 
+0.4 & 9.03E-03 & 0.391 & 0.388& 0.00632 & 0.9713 & 1.44E-05 \\ 
+\hline 
+0.5 & 4.66E-02 & 0.453 & 0.44990 & 0.00772 & 0.8998 & 7.41E-05 \\ 
+\hline 
+0.6 & 1.11E-01 & 0.489 & 0.4851& 0.00879 & 0.8085 & 1.76E-04\\ 
+\hline 
+0.7  & 1.87E-01 & 0.512 & 0.5080 & 0.00897 & 0.7257 & 2.98E-04 \\ 
+\hline 
+0.8 & 2.21E-01 & 0.559 & 0.5249 & 0.06100 & 0.6561 &  3.83E-04 \\ 
+\hline 
+0.9 & 3.57E-01& 0.543 & 0.53780 & 0.00958 & 0.5976 & 5.68E-04 \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\section*{Conclusion:}
+The results from lab were fairly self-evident and there was little conflict when it came to gathering data. For the most part using the data we gathered from lab it is safe to assume that the experimentation done confirms the theory derived in class.
+
+ 
+
+\end{document}
