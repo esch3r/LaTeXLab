@@ -1,0 +1,188 @@
+\documentclass[10pt,a4paper,draft]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\center % Center everything on the page
+\textsc{\LARGE University of Minnesota-Duluth}\\[1.5cm] % Name of your university/college
+\textsc{\Large EE 2212}\\[0.5cm] % Major heading such as course name
+\textsc{\large Electronics I}\\[0.5cm] % Minor heading such as course title
+\HRule \\[0.4cm]
+{ \huge \bfseries \emph{{\color{black}Lab 1: RC Frequency $\&$ Time response }}}\\[0.4cm] % Title of your document
+{\color{black}{\large \today}}\\
+\HRule \\[1cm]
+
+
+% Title section
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Johnathan \textsc{Machler}\\
+Lab  \textsc{Partner}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dawson \textsc{Rosell} % Lab Supervisor's Name
+\end{flushright}
+
+
+\end{minipage}\\[1cm] % parameter alters space between this part and the abstract
+
+\begin{abstract}
+Abstracts are very important in the technical, conference,   and trade literature.
+The abstract is a very important summary of the work (without graphs, diagrams).
+It is not the same as an introduction or conclusion.
+Most abstracts for these laboratory experiments should be on the order of \textbf{200-300 words}, i.e. essentially utilize the entire cover page. It is  typically written at the completion of the report when you have had 
+\end{abstract}
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+
+
+
+
+\part*{Introduction:}
+This lab will be a broad overview of many of the concepts from EE 2006. It will be a review of how to use a lot of the lab equipment in the context of circuits which vary with respect to frequency and time. Concept of impedance and transfer functions will be explored through constructing a circuit dual of a bandpass filter.
+\part*{Background:}
+This section should describe the theory utilized to complete the experiment and cite any material that was used in the design process. For novel implementations literature and related work completed by others should be described and cited. 
+\part*{Procedure:}
+Briefly describe the steps taken to complete the experiment. This should include circuit diagrams, etc. Component values are important.   Use standard symbols for circuit elements and label signals where appropriate.  SPICE allows you to save circuit diagrams to the clipboard so that you can embed these circuit diagrams in your report.
+\\
+
+Drive circuit 1 with a 2 volt peak-to-peak square wave  (the two volt amplitude is not critical-look for minimal noise to set the amplitude) and observe the output.
+
+\begin{flushleft}
+Materials needed for lab:
+\end{flushleft}
+\begin{itemize}
+\item Breadboard
+\item Multimeter
+\item Oscilloscope
+\end{itemize}
+
+ 
+
+\section{Equations}
+ 
+\begin{align}
+V_{out}(t) &=A(1-e^{-\dfrac{t}{\tau}}) \\
+V_{out}(t) & =A(e^{-\dfrac{t}{\tau}}) \\
+V_{out}(t) & = \alpha \dfrac{d(V_{in}(t))}{dt} & Passive\enspace diffeneriator \\
+V_{out}(t) &= \alpha \int_{a}^{b} V_{in} (t)dt  & Passive\enspace Integrator
+\end{align}
+
+
+Where $\tau = RC $ is the time constant, A is the amplitude, t is the variable time \
+
+
+
+\section{Schematics}
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{integrator.png}
+    \caption{Passive Integrator}
+  
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{Passive.png}
+    \caption{Passive differentiator}
+
+  \end{subfigure}
+  \caption{Circuit Duals.}
+\end{figure}
+
+
+
+\part*{Measurement and Analysis of Results:}
+Include some comments  about   the lab accomplishments and what was learned. Any comments or suggestions for future improvements of the labs can be included here.
+\section{Tables:}
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{Frequency Domain Response } \\ 
+\hline 
+Parameter & Calculated  & SPICE & Measured & Comments \\ 
+\hline 
+Rise Time, $t_{r}$ & 0 & 0 & 0 & 0 \\ 
+\hline 
+Time Constant, $\tau$ & 0 & 0 & 0 & 0 \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline 
+\multicolumn{5}{|c|}{Time Domain Response } \\ 
+\hline 
+Parameter & Calculated  & SPICE & Measured  & Comments \\ 
+\hline 
+Fall Time,$t_{f}$ & 0 & 0 & 0 & 0 \\ 
+\hline 
+Time Constant,$\tau$ & 0 & 0 & 0 & 0 \\ 
+\hline 
+\end{tabular} 
+\end{center}
+\section{Graphs:}
+Upload some screenshots of each reading on the oscilloscope \\
+with a caption below it and some brief analysis
+
+
+
+
+
+
+\part*{Conclusion:}
+Include some comments  about   the lab accomplishments and what was learned. Any comments or suggestions for future improvements of the labs can be included here.
+
+
+\begin{thebibliography}{}
+
+  \bibitem{baker} Baker, N. 1966,
+      in Stellar Evolution,
+      ed.\ R. F. Stein \& A. G. W. Cameron
+      (Plenum, New York) 333
+
+   \bibitem{balluch} Balluch, M. 1988,
+      A\&A, 200, 58
+
+   \bibitem{cox} Cox, J. P. 1980,
+      Theory of Stellar Pulsation
+      (Princeton University Press, Princeton) 165
+
+   \bibitem{cox69} Cox, A. N.,\& Stewart, J. N. 1969,
+      Academia Nauk, Scientific Information 15, 1
+
+   \bibitem{mizuno} Mizuno H. 1980,
+      Prog. Theor. Phys., 64, 544
+   
+   \bibitem{tscharnuter} Tscharnuter W. M. 1987,
+      A\&A, 188, 55
+  
+   \bibitem{terlevich} Terlevich, R. 1992, in ASP Conf. Ser. 31, 
+      Relationships between Active Galactic Nuclei and Starburst Galaxies, 
+      ed. A. V. Filippenko, 13
+
+   \bibitem{yorke80a} Yorke, H. W. 1980a,
+      A\&A, 86, 286
+
+   \bibitem{zheng} Zheng, W., Davidsen, A. F., Tytler, D. \& Kriss, G. A.
+      1997, preprint
+\end{thebibliography}
+
+{\Large NO MORE THAN THREE PAGES MAX }
+\end{document}
